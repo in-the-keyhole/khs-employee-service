@@ -577,7 +577,7 @@
         <spring-boot.version>1.1.6.RELEASE</spring-boot.version>
         <spring.security.version>3.2.3.RELEASE</spring.security.version>
         <spring.version>4.0.5.RELEASE</spring.version>
-        <start-class>com.jobshakers.boot.Application</start-class>
+        <start-class>khs.employee.boot.Application</start-class>
     </properties>
   
   
