@@ -21,8 +21,16 @@
 			type="annotation" />
 	</context:component-scan>
 	
-	<bean id="dbAuthManager" class="khs.service.authentication.ServiceAuthenticationManager"/> 
-
+	<bean id="dbAuthManager" class="khs.service.authentication.ServiceAuthenticationManager">
+	   	<property name="authenticator" ref="authenticator"></property>
+	</bean> 
+	
+    <bean class="khs.service.authentication.BaseSessionTokenService" />
+	
+	
+	<bean id="authenticator" class="khs.service.authentication.ServiceAuthenticator">
+	   
+	</bean>
 	 	
      <bean class="khs.service.authentication.ServiceAuthentication">
 		<property name="authenticationManager" ref="dbAuthManager"></property>
