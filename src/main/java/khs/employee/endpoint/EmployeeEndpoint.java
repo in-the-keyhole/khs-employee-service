@@ -12,7 +12,7 @@ import com.khs.sherpa.annotation.Endpoint;
 import com.khs.sherpa.annotation.MethodRequest;
 import com.khs.sherpa.annotation.Param;
 
-@Endpoint(authenticated=false)
+@Endpoint(authenticated=true)
 @Configurable
 public class EmployeeEndpoint {
 	
