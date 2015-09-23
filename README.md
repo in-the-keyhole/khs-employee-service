@@ -15,7 +15,7 @@ Service Registry Configuration
 -------------------------------
 By default, service registers with Keyhole Cloud registry, to register with a local registry add this VM argument when you run the application 
 
-     -Deureka.environment=dev
+     -Deureka.environment=DEV
   
 API
 ---
