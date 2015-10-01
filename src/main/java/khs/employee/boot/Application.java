@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import khs.service.discovery.EurekaRegistry;
+import khs.service.metrics.ApiHealthCheckServletContextListener;
+import khs.service.metrics.MetricsContextListener;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -29,6 +31,7 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.core.env.Environment;
 import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
 
+import com.codahale.metrics.servlets.AdminServlet;
 import com.khs.sherpa.SherpaContextListener;
 import com.khs.sherpa.servlet.SherpaServlet;
 
@@ -97,6 +100,14 @@ public class Application implements ServletContextInitializer {
 		ServletRegistration servletRegistration = servletContext.addServlet("sherpa", SherpaServlet.class);
 		servletRegistration.addMapping("/api");
 		servletRegistration.addMapping("/api/*");
+		
+		servletContext.addListener(MetricsContextListener.class.getName());
+		servletRegistration = servletContext.addServlet("metrics", AdminServlet.class);
+		servletRegistration.addMapping("/metrics/*");
+		
+		servletContext.addListener(ApiHealthCheckServletContextListener.class.getName());
+	
+		
     
 		registry.registerAndStart();
     }
