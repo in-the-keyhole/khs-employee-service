@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import khs.service.discovery.EurekaRegistry;
+import khs.service.filter.ApiFilter;
 import khs.service.metrics.ApiHealthCheckServletContextListener;
 import khs.service.metrics.MetricsContextListener;
 
@@ -107,8 +108,10 @@ public class Application implements ServletContextInitializer {
 		
 		servletContext.addListener(ApiHealthCheckServletContextListener.class.getName());
 	
+		final FilterRegistration apiFilterRegistration = servletContext.addFilter("apifilter", new ApiFilter());
+		apiFilterRegistration.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), true, "/api/*");
+	
 		
-    
 		registry.registerAndStart();
     }
     
