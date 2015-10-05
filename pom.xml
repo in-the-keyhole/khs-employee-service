@@ -5,7 +5,7 @@
   <version>0.0.1-SNAPSHOT</version>
   
      <build>
-        <finalName>khs-resource-service-app</finalName>
+        <finalName>khs-employee-service-app</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
