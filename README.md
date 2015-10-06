@@ -13,7 +13,7 @@ Installation
 
 Service Registry Configuration
 -------------------------------
-By default, service registers with Keyhole Cloud registry, to register with a local registry add this VM argument when you run the application 
+By default, service registers with a `localhost` Cloud registry, to utilize an environment specific (DEV,TEST,PROD) registry. Add this VM argument when you run the application to use an environment specific property file. This variable value will be suffixed to the Eureka property file in this fashion `eureka-client-dev.properties`.
 
      -Deureka.environment=DEV
   
