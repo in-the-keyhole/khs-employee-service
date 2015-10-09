@@ -1,11 +1,9 @@
-FROM khs-service-base
-
+FROM khsprojectuiservice_service-base
 RUN mkdir --parents /usr/src/app
 WORKDIR /usr/src/app
-
+ADD /pom.xml /container/app/
+RUN mvn verify clean --fail-never
 ADD . /usr/src/app
-
-RUN mvn install
-
+RUN mvn package -Dmaven.test.skip=true
 EXPOSE 8082
-CMD java -jar target/khs-resource-service-app.jar
+ENTRYPOINT ["java","-jar","target/khs-employee-service-app.jar"]
