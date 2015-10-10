@@ -4,6 +4,7 @@ WORKDIR /usr/src/app
 ADD /pom.xml /usr/src/app/
 RUN mvn verify clean --fail-never
 ADD . /usr/src/app
-RUN mvn clean package -Dmaven.test.skip=true
+RUN echo cache-6
+RUN mvn clean package --update-snapshots -Dmaven.test.skip=true
 EXPOSE 8082
 ENTRYPOINT ["java","-jar","target/khs-employee-service-app.jar"]
