@@ -1,0 +1,10 @@
+maven:
+        build:
+                image:  khs-employee-service-maven
+                dockerfile_path: Dockerfile.maven
+        volumes:
+                    - ./tmp:/app/target
+deploy:
+        build:
+                image: keyholesoftware/khs-employee-service
+                dockerfile_path: Dockerfile.package

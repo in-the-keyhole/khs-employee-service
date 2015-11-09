@@ -13,3 +13,5 @@ npm-debug.log*
 /src/main/node/node
 bin
 .DS_Store
+codeship.aes
+/tmp
