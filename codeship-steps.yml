@@ -1,8 +1,10 @@
 - name: ci
   service: maven
   command: mvn package
-- service: deploy
+- service: publish
   type: push
   image_name: keyholesoftware/khs-employee-service
   registry: https://index.docker.io/v1/
   encrypted_dockercfg_path: dockercfg.encrypted
+- service: deploy
+  command: bash deploy.sh
