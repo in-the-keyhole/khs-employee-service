@@ -1,5 +1,9 @@
 # khs-employee-service
+
 Employe Micro Service implementation
+
+[ ![Codeship Status for
+in-the-keyhole/khs-employee-service](https://codeship.com/projects/5e95fb90-695a-0133-5fff-666650db048e/status?branch=master)](https://codeship.com/projects/114522)
 
 Description
 -----------
