@@ -11,6 +11,6 @@ publish:
 deploy:
     image: keyholesoftware/khs-codeship-docker-deploy
     encrypted_env_file: deployment.env.encrypted
-deploy-2:
+deploy_2:
     image: keyholesoftware/khs-codeship-docker-deploy
     encrypted_env_file: deployment-2.env.encrypted

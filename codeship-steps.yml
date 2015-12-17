@@ -9,5 +9,5 @@
   encrypted_dockercfg_path: dockercfg.encrypted
 - service: deploy
   command: bash deploy.sh
-- service: deploy-2
+- service: deploy_2
   command: bash deploy.sh
