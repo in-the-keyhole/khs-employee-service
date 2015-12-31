@@ -22,6 +22,7 @@ import khs.service.filter.ApiFilter;
 import khs.service.metrics.ApiHealthCheckServletContextListener;
 import khs.service.metrics.MetricsContextListener;
 
+import khs.trouble.servlet.TroubleServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
@@ -105,7 +106,12 @@ public class Application implements ServletContextInitializer {
 		servletContext.addListener(MetricsContextListener.class.getName());
 		servletRegistration = servletContext.addServlet("metrics", AdminServlet.class);
 		servletRegistration.addMapping("/metrics/*");
-		
+
+
+		servletRegistration = servletContext.addServlet("trouble", TroubleServlet.class);
+		servletRegistration.addMapping("/trouble/*");
+		servletRegistration.setInitParameter("token", "abc123");
+
 		servletContext.addListener(ApiHealthCheckServletContextListener.class.getName());
 	
 		final FilterRegistration apiFilterRegistration = servletContext.addFilter("apifilter", new ApiFilter());
