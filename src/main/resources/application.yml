@@ -17,10 +17,10 @@ eureka:
       instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
     registryFetchIntervalSeconds: 5
-
+    
 logging:
   level:
-    ROOT: INFO
+    ROOT: ERROR
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     com.netflix.discovery: 'OFF'
@@ -28,4 +28,4 @@ logging:
 spring:
   cloud:
     bus:
-      enabled: true
+      enabled: false

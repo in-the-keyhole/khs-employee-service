@@ -13,7 +13,7 @@ import com.keyholesoftware.employees.model.Employee;
 import com.keyholesoftware.employees.model.EmployeeRepository;
 
 @RestController
-public class Api {
+public class EmployeesApi {
 
 	@Autowired
 	EmployeeRepository repository;
@@ -27,8 +27,7 @@ public class Api {
 	@RequestMapping(method = RequestMethod.GET, value = "/employees/{id}")
 	ResponseEntity<Employee> one(@PathVariable("id") Long id) {
 		Employee employee = repository.findOne(id);
-		return employee != null ? new ResponseEntity<Employee>(employee, HttpStatus.OK)
-				: new ResponseEntity<Employee>(HttpStatus.NOT_FOUND);
+		return employee != null ? new ResponseEntity<Employee>(employee, HttpStatus.OK) : new ResponseEntity<Employee>(HttpStatus.NOT_FOUND);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/employees")

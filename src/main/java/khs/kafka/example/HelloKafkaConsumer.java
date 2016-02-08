@@ -28,8 +28,7 @@ public class HelloKafkaConsumer extends Thread {
 	public void run() {
 		Map<String, Integer> topicCountMap = new HashMap<String, Integer>();
 		topicCountMap.put(TOPIC, new Integer(1));
-		Map<String, List<KafkaStream<byte[], byte[]>>> consumerMap = consumerConnector
-				.createMessageStreams(topicCountMap);
+		Map<String, List<KafkaStream<byte[], byte[]>>> consumerMap = consumerConnector.createMessageStreams(topicCountMap);
 		KafkaStream<byte[], byte[]> stream = consumerMap.get(TOPIC).get(0);
 		ConsumerIterator<byte[], byte[]> it = stream.iterator();
 		while (it.hasNext())
@@ -37,12 +36,13 @@ public class HelloKafkaConsumer extends Thread {
 
 	}
 
-//	private static void printMessages(ByteBufferMessageSet messageSet) throws UnsupportedEncodingException {
-//		for (MessageAndOffset messageAndOffset : messageSet) {
-//			ByteBuffer payload = messageAndOffset.message().payload();
-//			byte[] bytes = new byte[payload.limit()];
-//			payload.get(bytes);
-//			System.out.println(new String(bytes, "UTF-8"));
-//		}
-//	}
+	// private static void printMessages(ByteBufferMessageSet messageSet) throws
+	// UnsupportedEncodingException {
+	// for (MessageAndOffset messageAndOffset : messageSet) {
+	// ByteBuffer payload = messageAndOffset.message().payload();
+	// byte[] bytes = new byte[payload.limit()];
+	// payload.get(bytes);
+	// System.out.println(new String(bytes, "UTF-8"));
+	// }
+	// }
 }
