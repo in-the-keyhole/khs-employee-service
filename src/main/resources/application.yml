@@ -10,17 +10,26 @@ endpoints:
     sensitive: false
 
 eureka:
-  instance:
-    leaseRenewalIntervalInSeconds: 10
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-    metadataMap:
-      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
-    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/
+  instance:
+    preferIpAddress: true
+
+#eureka:
+#  instance:
+#    leaseRenewalIntervalInSeconds: 10
+#    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+#    metadataMap:
+#      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+#  client:
+#    serviceUrl:
+#      defaultZone: http://192.168.99.100:8761/eureka/
+#    registryFetchIntervalSeconds: 5
     
 logging:
   level:
-    ROOT: ERROR
+    ROOT: INFO
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     com.netflix.discovery: 'OFF'
