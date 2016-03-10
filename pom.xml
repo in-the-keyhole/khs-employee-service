@@ -52,6 +52,6 @@
 	</dependencies>
 
 	<properties>
-		<docker.image.name>employee-service</docker.image.name>
+		<docker.image.name>reference-employee-service</docker.image.name>
 	</properties>
 </project>
