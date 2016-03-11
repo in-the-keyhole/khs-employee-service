@@ -18,6 +18,7 @@ public class Employee {
 	Long id;
 
 	private String firstname;
+	private String middlename = "X";
 	private String lastname;
 	private String email;
 }
