@@ -29,7 +29,7 @@ eureka:
     
 logging:
   level:
-    ROOT: ERROR
+    ROOT: INFO
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     com.netflix.discovery: 'OFF'
