@@ -1,5 +1,6 @@
 package com.keyholesoftware.employees.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,8 +18,11 @@ public class Employee {
 	@GeneratedValue
 	Long id;
 
+	@Column(name = "lastname")
 	private String firstname;
-	private String middlename = "X";
+	
+	@Column(name = "firstname")
 	private String lastname;
+	
 	private String email;
 }
