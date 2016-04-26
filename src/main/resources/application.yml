@@ -1,5 +1,5 @@
 server:
-  port: 0
+  port: 8082
 
 endpoints:
   restart:
@@ -10,22 +10,10 @@ endpoints:
     sensitive: false
 
 eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://eureka:8761/eureka/
   instance:
-    preferIpAddress: true
-
-#eureka:
-#  instance:
-#    leaseRenewalIntervalInSeconds: 10
-#    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-#    metadataMap:
-#      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-#  client:
-#    serviceUrl:
-#      defaultZone: http://192.168.99.100:8761/eureka/
-#    registryFetchIntervalSeconds: 5
+    leaseRenewalIntervalInSeconds: 10
+  client:
+    registryFetchIntervalSeconds: 5
     
 logging:
   level:
