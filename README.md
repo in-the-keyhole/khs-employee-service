@@ -1,30 +1,24 @@
-# khs-employee-service
-
-Employe Micro Service implementation
-
-[ ![Codeship Status for
-in-the-keyhole/khs-employee-service](https://codeship.com/projects/5e95fb90-695a-0133-5fff-666650db048e/status?branch=master)](https://codeship.com/projects/114522)
+# khs-employee-service 
+-------------------
 
 Description
 -----------
-Provides CRUD API for Employee 
+Provides bounded context API for Employees 
 
 Installation
 ------------
-1. Clone Repo  (Project is dependent on khs-service-base project)
-2. Import into STS Eclipse and configure as a Maven Project 
-3. Run `khs.project.boot.Application` as a Java Application 
+1. Clone this repository
+2. Import to STS Eclipse, configure as a Maven project
+3. Start server by running the `com.keyolesoftware.employees.EmployeesApp` as a Java Application
 
-Service Registry Configuration
+Discovery Server Configuration
 -------------------------------
-By default, service registers with a `localhost` Cloud registry, to utilize an environment specific (DEV,TEST,PROD) registry. Add this VM argument when you run the application to use an environment specific property file. This variable value will be suffixed to the Eureka property file in this fashion `eureka-client-dev.properties`.
+By default, the service registers with a `localhost` Eureka-based registry
 
-     -Deureka.environment=DEV
-  
 API
 ---
-     api/employee/all  | GET  |  All Employees
-     api/employee/find/{id} | GET | Find Employee by ID 
-     api/employee/save   | POST | Add an Employee 
-     api/employee/save   | PUT  | Update a Employee 
-     api/employee/save   | DELETE | Remove a Employee
+     /employees           | GET    | returns all Employees
+     /employees/{id}      | GET    | returns a specific Employee by 'id'
+     /employees           | POST   | add a new Employee 
+     /employees/{id}      | PUT    | update an Employee
+     /employees/{id}      | DELETE | deletes an Employee
