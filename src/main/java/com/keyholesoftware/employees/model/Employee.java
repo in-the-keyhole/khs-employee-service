@@ -18,10 +18,10 @@ public class Employee {
 	@GeneratedValue
 	Long id;
 
-	@Column(name = "lastname")
+	@Column(name = "firstname")
 	private String firstname;
 	
-	@Column(name = "firstname")
+	@Column(name = "lastname")
 	private String lastname;
 	
 	private String email;
