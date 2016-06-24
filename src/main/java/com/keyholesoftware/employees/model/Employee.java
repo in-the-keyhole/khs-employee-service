@@ -1,5 +1,5 @@
 package com.keyholesoftware.employees.model;
-//Jaime was here
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
