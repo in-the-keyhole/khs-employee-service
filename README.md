@@ -7,8 +7,11 @@ Provides bounded context API for Employees
 
 Installation
 ------------
+
+**Note:** This project uses 'Project Lombok'.  To install it in your IDE, follow the directions found **[here](https://projectlombok.org/download.html)**
+
 1. Clone this repository
-2. Import to STS Eclipse, configure as a Maven project
+2. Import into an IDE and configure it as a Maven project
 3. Start server by running the `com.keyolesoftware.employees.EmployeesApp` as a Java Application
 
 Discovery Server Configuration
