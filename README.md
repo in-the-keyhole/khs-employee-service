@@ -8,7 +8,7 @@ Provides bounded context API for Employees
 Installation
 ------------
 
-**Note:** This project uses 'Project Lombok'.  To install it in your IDE, follow the directions found **[here](https://projectlombok.org/download.html)**
+**Note: This project requires `Project Lombok`.  To install it in your IDE, follow the directions found _[here](https://projectlombok.org/download.html)_**
 
 1. Clone this repository
 2. Import into an IDE and configure it as a Maven project
