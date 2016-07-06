@@ -8,8 +8,6 @@ Provides bounded context API for Employees
 Installation
 ------------
 
-**Note: This project requires `Project Lombok`.  To install it in your IDE, follow the directions found _[here](https://projectlombok.org/download.html)_**
-
 1. Clone this repository
 2. Import into an IDE and configure it as a Maven project
 3. Start server by running the `com.keyolesoftware.employees.EmployeesApp` as a Java Application
