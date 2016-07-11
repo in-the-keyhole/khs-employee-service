@@ -6,28 +6,21 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 /**
- * This class is necessary for the JPA Entity listener to access 
- * Spring Beans
+ * This class is necessary for the JPA Entity listener to access Spring Beans
+ * 
  * @author dpitt
  *
  */
-
-
 @Component
 public class JpaApplicationContext implements ApplicationContextAware {
-	
-	
-	  private static ApplicationContext CONTEXT;
 
-	  public void setApplicationContext(final ApplicationContext context)
-	              throws BeansException {
-	    CONTEXT = context;
-	  }
+	private static ApplicationContext CONTEXT;
 
-	 // public static <T> T getBean(Class<T> clazz) { return CONTEXT.getBean(clazz); }
-	  
-	  public static <T> T getBean(String id) { return (T) CONTEXT.getBean(id); }
-	  
+	public void setApplicationContext(final ApplicationContext context) throws BeansException {
+		CONTEXT = context;
+	}
+
+	public static <T> T getBean(Class<T> clazz) {
+		return CONTEXT.getBean(clazz);
+	}
 }
-
-
