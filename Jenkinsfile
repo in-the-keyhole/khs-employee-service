@@ -26,6 +26,6 @@ node('docker') {
    sh 'wget https://cloud.docker.com/api/app/v1/service/ceb5eaec-9b42-4a38-b744-72a15bf5623b/trigger/71ed527c-c1d9-4964-b6d2-e6c11d2e199f/call/ --post-data ""'
    input 'Does Staging look okay?'
    
- state 'Deploy to Production'
+ stage 'Deploy to Production'
    echo 'Deployed to Production'
 }
