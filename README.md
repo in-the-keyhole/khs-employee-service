@@ -1,7 +1,6 @@
 # khs-employee-service 
 ------------------- 
 
-
 Description
 -----------
 Provides bounded context API for Employees 
