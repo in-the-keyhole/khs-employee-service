@@ -19,7 +19,7 @@ node('docker') {
    
  stage 'Deploy to Staging'
    //Deploy to Staging on Docker cloud
-   sh 'wget https://cloud.docker.com/api/app/v1/service/ceb5eaec-9b42-4a38-b744-72a15bf5623b/trigger/71ed527c-c1d9-4964-b6d2-e6c11d2e199f/call/ --post-data ""'
+   sh 'wget https://cloud.docker.com/api/app/v1/service/9659bdc5-49da-469f-9435-f1bc9e946a2e/trigger/9f1c0add-a0fe-4541-b68a-4ac1ada8e622/call/ --post-data ""'
    input 'Does Staging look okay?'
    
  stage 'Deploy to Production'
