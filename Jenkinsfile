@@ -1,11 +1,11 @@
 node('docker') {
-  stage 'Pull from SCM'  
+  stage 'Pull from Git'  
     git credentialsId: 'github-credentials', url: 'https://github.com/in-the-keyhole/khs-employee-service.git'
   
-  stage 'Test Code'  
+  stage 'Perform Tests'  
     sh 'mvn test'
 
- stage 'Build app' 
+ stage 'Package Application' 
     sh 'mvn package -DskipTests=true'
   
  stage 'Build Docker Image'
