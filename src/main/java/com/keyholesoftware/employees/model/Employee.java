@@ -15,7 +15,7 @@ public class Employee {
 	@GeneratedValue
 	Long id;
 
-	@Column(name = "firstname")
+	@Column(name = "lastname")
 	private String firstname;
 	
 	@Column(name = "lastname")
