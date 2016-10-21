@@ -7,6 +7,7 @@ import javax.persistence.Id;
 
 /**
  * @author Jaime Niswonger
+ * 
  */
 @Entity
 public class Employee {
