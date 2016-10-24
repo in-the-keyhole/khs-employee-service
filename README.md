@@ -1,16 +1,16 @@
 # khs-employee-service 
 ------------------- 
 
+
 Description
 -----------
 Provides bounded context API for Employees 
-
 
 Installation
 ------------
 
 1. Clone this repository
-2. Import into an IDE and configure it as a Maven project
+2. Import the project into an IDE and configure it as a Maven project
 3. Start server by running the `com.keyolesoftware.employees.EmployeesApp` as a Java Application
 
 Discovery Server Configuration
