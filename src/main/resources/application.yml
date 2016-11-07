@@ -26,3 +26,7 @@ spring:
   cloud:
     bus:
       enabled: false
+
+troublemaker:
+  client:
+    token: abc123
