@@ -12,7 +12,7 @@ node('docker') {
    def pkg = docker.build ('keyholesoftware/reference-employee-service', '.')
 
  stage 'Push Image to Repository'
-   docker.withRegistry ('https://index.docker.io/v1/', 'github-credentials') {
+   docker.withRegistry ('https://index.docker.io/v1/', 'dockerhub-credentials') {
        sh 'ls -lart' 
        pkg.push 'latest'
    }
