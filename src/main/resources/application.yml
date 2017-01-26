@@ -18,6 +18,7 @@ eureka:
 logging:
   level:
     ROOT: INFO
+    org.springframework.web: DEBUG
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     com.netflix.discovery: 'OFF'
