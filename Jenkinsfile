@@ -3,7 +3,7 @@ node('docker') {
     git credentialsId: 'github-credentials', url: 'https://github.com/in-the-keyhole/khs-employee-service.git'
   
   stage 'Perform Tests'  
-    sh 'mvn test'
+    //sh 'mvn test'
 
  stage 'Package Application' 
     sh 'mvn package -DskipTests=true'
