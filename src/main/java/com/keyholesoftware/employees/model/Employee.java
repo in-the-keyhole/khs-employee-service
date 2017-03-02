@@ -19,7 +19,7 @@ public class Employee {
 	@Column(name = "firstname")
 	private String firstname;
 	
-	@Column(name = "firstname")
+	@Column(name = "lastname")
 	private String lastname;
 	
 	private String email;
