@@ -1,5 +1,5 @@
 target/*
-!target/khs-employee-service-1.0.0-SNAPSHOT.jar
+!target/khs-employee-service.jar
 .eclipse/*
 .idea/*
 .settings/*
