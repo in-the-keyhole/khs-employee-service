@@ -1,33 +1,65 @@
 server:
   port: 8082
+  ssl:
+    enabled: false
+    keyStore: classpath:keystore.jks
+    trustStore: classpath:truststore.jks
+    keyStorePassword: password
+    trustStorePassword: password
+    keyAlias: employees
+    clientAuth: WANT
 
+security:
+  require-ssl: false
+  
 endpoints:
   restart:
-    enabled: true
+    enabled: false
   shutdown:
-    enabled: true
+    enabled: false
   health:
     sensitive: false
-
-eureka:
-  instance:
-    leaseRenewalIntervalInSeconds: 10
-  client:
-    registryFetchIntervalSeconds: 5
+    
+management:
+  security:
+    enabled: false
     
 logging:
   level:
     ROOT: INFO
-    org.springframework.web: DEBUG
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-    com.netflix.discovery: 'OFF'
+    org.springframework.jdbc.core.JdbcTemplate: DEBUG
+    org.apache.zookeeper: ERROR
 
 spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
   cloud:
-    bus:
-      enabled: false
-
-troublemaker:
-  client:
-    token: abc123
+    stream:
+      auto-startup: false
+      bindings:
+        output:
+          destination: employee-delete
+          contentType: text/plain
+  data:
+    rest:
+      base-path: /api
+                
+api:
+  statistics:
+    name: employeeservice
+    pattern-match: /api/.*
+    publish-url: https://beta.grokola.com/sherpa/api/stats/1
+    token: c67d90d0-1284-48e3-8b4d-718b48e20695 
+    publish: true
+         
+swagger:
+  publish:
+    publish-url: https://beta.grokola.com/swagger/publish/1
+    security-token: c67d90d0-1284-48e3-8b4d-718b48e20695
+    swagger-url: http://127.0.0.1:${server.port}/v2/api-docs
+    
+keyhole:
+  security:
+    public-key-url: http://localhost:3000/api/v1/certs/{0}
+    whitelist: apigateway, someOtherHost

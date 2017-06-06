@@ -1,3 +1,11 @@
 spring:
   application:
     name: employees
+  cloud:
+    config:
+      fail-fast: true
+      retry:
+        initial-interval: 2000
+        max-interval: 10000
+        max-attempts: 10
+        multiplier: 3

@@ -17,7 +17,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -32,7 +31,7 @@ import com.keyholesoftware.employees.model.Employee;
 import com.keyholesoftware.employees.model.EmployeeRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = EmployeesApp.class)
+//@SpringApplicationConfiguration(classes = EmployeesApp.class)
 @WebAppConfiguration
 public class EmployeeAPITest {
 
