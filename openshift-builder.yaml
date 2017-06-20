@@ -1,0 +1,179 @@
+apiVersion: v1
+kind: Template
+metadata:
+  name: employee-service
+  annotations:
+    description: Reference Employee Microservice
+    iconClass: icon-spring
+    tags: builder, spring-boot, spring-cloud, microservice
+objects:
+# IMAGE STREAM DEFINITION
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    name: ${APP_NAME}
+    labels:
+      app: ${APP_NAME}
+    creationTimestamp: null
+  spec: {}
+  status:
+    dockerImageRepository:
+# BUILD CONFIG
+- kind: BuildConfig
+  apiVersion: v1
+  metadata:
+    name: ${APP_NAME}
+    labels:
+      app: ${APP_NAME}
+  spec:
+    source:
+      type: Git
+      git:
+        uri: ${GIT_URL}
+        ref: ${GIT_REF}
+      sourceSecret:
+            name: ${GIT_SECRET}
+    strategy:
+      type: Source
+      sourceStrategy:
+        from:
+          kind: ImageStreamTag
+          name: spring-boot-s2i:latest
+    output:
+      to:
+        kind: ImageStreamTag
+        name: ${APP_NAME}:latest
+    triggers:
+    - github:
+        secret: ${GITHUB_TRIGGER_SECRET}
+      type: GitHub
+    - generic:
+        secret: ${GENERIC_TRIGGER_SECRET}
+      type: Generic
+    - type: ConfigChange
+    - imageChange: {}
+      type: ImageChange
+# DEPLOYMENT CONFIG
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    name: ${APP_NAME}
+    labels:
+      app: ${APP_NAME}
+  spec:
+    strategy:
+      type: Rolling
+      rollingParams:
+        updatePeriodSeconds: 1
+        intervalSeconds: 1
+        timeoutSeconds: 600
+        maxUnavailable: 25%
+        maxSurge: 25%
+      resources: {}
+    triggers:
+      - type: ConfigChange
+      - type: ImageChange
+        imageChangeParams:
+          automatic: true
+          containerNames:
+            - ${APP_NAME}
+          from:
+            kind: ImageStreamTag
+            name: '${APP_NAME}:latest'
+    replicas: 1
+    selector:
+      app: ${APP_NAME}
+      deploymentconfig: ${APP_NAME}
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: ${APP_NAME}
+          deploymentconfig: ${APP_NAME}
+      spec:
+        containers:
+          - name: ${APP_NAME}
+            image: ${APP_NAME}
+            ports:
+              - containerPort: 8080
+                protocol: TCP
+              - containerPort: 8081
+                protocol: TCP
+            resources: {}
+            readinessProbe:
+              httpGet:
+                path: /health
+                port: 8081
+                scheme: HTTP
+              initialDelaySeconds: 5
+              timeoutSeconds: 1
+              periodSeconds: 10
+              successThreshold: 1
+              failureThreshold: 3
+            env:
+              - name: spring_cloud_config_uri
+                value: 'http://configuration-server:8080'
+            terminationMessagePath: /dev/termination-log
+            imagePullPolicy: Always
+        restartPolicy: Always
+        terminationGracePeriodSeconds: 30
+        dnsPolicy: ClusterFirst
+        securityContext: {}
+  status: {}
+# SERVICE CONFIG
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: ${APP_NAME}
+    labels:
+      app: ${APP_NAME}
+  spec:
+    ports:
+      - name: 8080-tcp
+        protocol: TCP
+        port: 8080
+        targetPort: 8080
+      - name: 8081-tcp
+        protocol: TCP
+        port: 8081
+        targetPort: 8081
+    selector:
+      app: ${APP_NAME}
+      deploymentconfig: ${APP_NAME}
+    type: ClusterIP
+    sessionAffinity: None
+  status:
+    loadBalancer: {}
+parameters:
+- description: The name of the new application
+  displayName: Application Name
+  name: APP_NAME
+  value: employee-service
+  required: true
+- description: The URL of the Git repository
+  displayName: Git URL
+  name: GIT_URL
+  value: https://github.com/in-the-keyhole/khs-employee-service.git
+  required: true
+- description: The Git branch/tag reference
+  displayName: Git branch/tag reference
+  name: GIT_REF
+  value: openshift
+  required: true
+- description: The secret containing Git credentials
+  displayName: Git Credentials Secret
+  name: GIT_SECRET
+  value: github-secret
+  required: true
+- description: GitHub Trigger Secret
+  from: '[a-zA-Z0-9]{8}'
+  generate: expression
+  name: GITHUB_TRIGGER_SECRET
+- description: Generic build Trigger Secret
+  from: '[a-zA-Z0-9]{8}'
+  generate: expression
+  name: GENERIC_TRIGGER_SECRET
+- description: Generic build Trigger Secret
+  from: '[a-zA-Z0-9]{8}'
+  generate: expression
+  name: GENERIC_TRIGGER_SECRET
