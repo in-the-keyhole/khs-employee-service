@@ -11,22 +11,17 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.Marker;
-import org.apache.logging.log4j.MarkerManager;
-import org.apache.logging.log4j.util.Supplier;
 import org.bouncycastle.asn1.x500.RDN;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.style.BCStyle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.filter.GenericFilterBean;
 
 public class X509ValidCertificateFilter extends GenericFilterBean {
 
-	private static final Logger log = LogManager.getLogger(X509ValidCertificateFilter.class);
-	private static final Marker SECURITY_MARKER = MarkerManager.getMarker("SECURITY");
-	private static final Marker INVALID_CERT_MARKER = MarkerManager.getMarker("INVALID CERTIFICATE").setParents(SECURITY_MARKER);
+	private static Logger log = LoggerFactory.getLogger(X509ValidCertificateFilter.class);
 	private static final String CERT_ATTRIBUTE = "javax.servlet.request.X509Certificate";
 
 	@Value("${keyhole.security.whitelist}")
@@ -42,7 +37,7 @@ public class X509ValidCertificateFilter extends GenericFilterBean {
 		if (cert != null && validateCertificate(cert)) {
 			filterChain.doFilter(request, response);
 		} else {
-			log.error(INVALID_CERT_MARKER, (Supplier<String>) () -> "No valid X.509 client authentication certificate found.");
+			log.error("No valid X.509 client authentication certificate found.");
 			((HttpServletResponse) response).sendError(HttpServletResponse.SC_UNAUTHORIZED);
 		}
 	}
