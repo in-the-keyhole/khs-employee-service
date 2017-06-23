@@ -18,9 +18,9 @@ By default, the service registers with a `localhost` Eureka-based registry
 
 API
 ---
-     /employees           | GET    | returns all Employees
-     /employees/{id}      | GET    | returns a specific Employee by 'id'
-     /employees           | POST   | add a new Employee 
-     /employees/{id}      | PUT    | update an Employee
-     /employees/{id}      | DELETE | deletes an Employee
+     /api/employees           | GET    | returns all Employees
+     /api/employees/{id}      | GET    | returns a specific Employee by 'id'
+     /api/employees           | POST   | add a new Employee 
+     /api/employees/{id}      | PUT    | update an Employee
+     /api/employees/{id}      | DELETE | deletes an Employee
 
