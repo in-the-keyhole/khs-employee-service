@@ -15,10 +15,10 @@ import com.keyholesoftware.publish.swagger.PublishSwagger;
 /**
  * @author Jaime Niswonger
  */
-@PublishSwagger
+//@PublishSwagger
 @SpringBootApplication
 @EnableCircuitBreaker
-@EnableApiStatistics
+//@EnableApiStatistics
 public class EmployeesApp {
 
 	public static void main(String[] args) {
