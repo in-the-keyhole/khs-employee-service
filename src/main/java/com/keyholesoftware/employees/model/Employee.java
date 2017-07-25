@@ -14,7 +14,8 @@ public class Employee {
 
 	@Id
 	@GeneratedValue
-	Long id;
+	@Column(name="id")
+	Long oId;
 
 	@Column(name = "firstname")
 	private String firstname;
@@ -24,12 +25,12 @@ public class Employee {
 	
 	private String email;
 
-	public Long getId() {
-		return id;
+	public Long getOId() {
+		return oId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setOId(Long id) {
+		this.oId = id;
 	}
 
 	public String getFirstname() {
