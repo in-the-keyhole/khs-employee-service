@@ -45,8 +45,9 @@ public class EmployeeEntityListener {
 
 	@PostRemove
 	void onPostRemove(Object o) {
-		MessageChannel outputChannel = JpaApplicationContext.getBean(Source.class).output();
 		Employee employee = (Employee) o;
+		log.info("Deletion recognized for employee id: " + employee.getOId());
+		MessageChannel outputChannel = JpaApplicationContext.getBean(Source.class).output();
 		outputChannel.send(MessageBuilder.withPayload("" + employee.getOId()).build());
 		log.info("raised delete message for employee id: " + employee.getOId());
 	}
