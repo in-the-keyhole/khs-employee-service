@@ -2,6 +2,7 @@ package com.keyholesoftware.employees.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -10,19 +11,20 @@ import javax.persistence.Id;
  * 
  */
 @Entity
+@EntityListeners({ EmployeeEntityListener.class })
 public class Employee {
 
 	@Id
 	@GeneratedValue
-	@Column(name="id")
+	@Column(name = "id")
 	Long oId;
 
 	@Column(name = "firstname")
 	private String firstname;
-	
+
 	@Column(name = "lastname")
 	private String lastname;
-	
+
 	private String email;
 
 	public Long getOId() {
