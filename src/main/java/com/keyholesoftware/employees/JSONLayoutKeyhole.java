@@ -44,7 +44,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
  *				"timeMillis": 1498156000633,
  *				"thread": "hystrix-EmployeeService-1",
  *				"level": "INFO",
- *				"logger": "com.dst.employees.tx.TransactionalBusinessTransaction",
+ *				"logger": "com.keyholesoftware.employees.EmployeeService",
  *				"markers": ["SOME MARKER", "SOME_MARKER_PARENT"]
  *				"name": "value",
  *				"anotherName": "anotherValue",
