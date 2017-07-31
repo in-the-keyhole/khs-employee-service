@@ -7,7 +7,8 @@ import javax.persistence.PostUpdate;
 import javax.persistence.PreRemove;
 import javax.persistence.PreUpdate;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.integration.support.MessageBuilder;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Component;
 @EnableBinding(Source.class)
 public class EmployeeEntityListener {
 
-	private Logger log = Logger.getLogger(EmployeeEntityListener.class);
+	private static final Logger log = LogManager.getLogger(EmployeeEntityListener.class);
 
 	void onPrePersist(Object o) {
 	}
