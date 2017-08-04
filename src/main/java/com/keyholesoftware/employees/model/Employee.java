@@ -19,6 +19,8 @@ public class Employee {
 	@Column(name = "id")
 	Long oId;
 
+	
+	
 	@Column(name = "firstname")
 	private String firstname;
 
