@@ -19,10 +19,10 @@ public class Employee {
 	@Column(name = "id")
 	Long oId;
 
-	@Column(name = "firstname")
+	@Column(name = "lastname")
 	private String firstname;
 
-	@Column(name = "lastname")
+	@Column(name = "firtname")
 	private String lastname;
 
 	private String email;
