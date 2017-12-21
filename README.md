@@ -13,7 +13,6 @@ Installation
 2. Import the project into an IDE and configure it as a Maven project
 3. Start server by running the `com.keyolesoftware.employees.EmployeesApp` as a Java Application
 
-
 API
 ---
      /employees           | GET    | returns all Employees
