@@ -4,9 +4,9 @@ node('maven') {
     sh "mvn test"
   }
   stage('Build Image') {
-    openshiftBuild(buildConfig: 'employee-service', showBuildLogs: 'true')
+    openshiftBuild(namespace: 'dev-reference', buildConfig: 'employee-service', showBuildLogs: 'true')
   }
   stage('Deploy') {
-    openshiftDeploy(deploymentConfig: 'employee-service')  
+    openshiftDeploy(namespace: 'dev-reference', deploymentConfig: 'employee-service')  
   }  
 }
