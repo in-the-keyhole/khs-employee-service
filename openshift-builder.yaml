@@ -92,7 +92,13 @@ objects:
           deploymentconfig: ${APP_NAME}
       spec:
         containers:
-          - name: ${APP_NAME}
+          - env:
+            - name: spring_cloud_config_uri
+              valueFrom:
+                configMapKeyRef:
+                  key: spring_cloud_config_uri
+                  name: bootstrap-config
+            name: ${APP_NAME}
             image: ${APP_NAME}
             ports:
               - containerPort: 8080
@@ -144,6 +150,22 @@ objects:
     sessionAffinity: None
   status:
     loadBalancer: {}
+# ROUTE CONFIG
+- apiVersion: v1
+  kind: Route
+  metadata:
+    name: ${APP_NAME}
+    labels:
+      app: ${APP_NAME}
+  spec:
+    host: ${ROUTE_HOST}
+    to:
+      kind: Service
+      name: ${APP_NAME}
+    port:
+      targetPort: 8080-tcp
+    wildcardPolicy: None
+# PARAMETERS    
 parameters:
 - description: The name of the new application
   displayName: Application Name
@@ -153,12 +175,12 @@ parameters:
 - description: The URL of the Git repository
   displayName: Git URL
   name: GIT_URL
-  value: https://github.com/in-the-keyhole/khs-employee-service.git
+  value: git@github.com:in-the-keyhole/khs-employee-service
   required: true
 - description: The Git branch/tag reference
   displayName: Git branch/tag reference
   name: GIT_REF
-  value: openshift
+  value: openshift-cicd
   required: true
 - description: The secret containing Git credentials
   displayName: Git Credentials Secret
@@ -177,3 +199,9 @@ parameters:
   from: '[a-zA-Z0-9]{8}'
   generate: expression
   name: GENERIC_TRIGGER_SECRET
+- description: The hostname for the route
+  displayName: Route Host
+  name: ROUTE_HOST
+  value: employees.keyhole.institute
+  required: true
+  
