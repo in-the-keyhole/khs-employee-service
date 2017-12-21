@@ -9,7 +9,7 @@ spec:
   triggers:
     - type: GitHub
       github:
-        secret: ${GITHUB_TRIGGER_SECRET}
+        secret: kdafd9dafkdaf338
   runPolicy: Serial
   source:
     type: Git
@@ -22,8 +22,3 @@ spec:
     type: JenkinsPipeline
     jenkinsPipelineStrategy:
       jenkinsfilePath: Jenkinsfile
-parameters:
-- description: GitHub Trigger Secret
-  from: '[a-zA-Z0-9]{8}'
-  generate: expression
-  name: GITHUB_TRIGGER_SECRET
