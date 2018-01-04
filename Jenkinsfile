@@ -10,7 +10,6 @@ node('maven') {
     openshiftBuild(buildConfig: 'employee-service', showBuildLogs: 'true')
   }
   stage('Deploy') {
-    openshiftDeploy(deploymentConfig: 'employee-service')
-    openshiftScale(deploymentConfig: 'employee-service',replicaCount: '2')  
+    openshiftDeploy(deploymentConfig: 'employee-service')  
   }  
 }
