@@ -4,8 +4,7 @@ node('maven') {
     sh "mvn test"
   }
   stage('Check Quality') {
-  	sh "which mvn"
-    sh "mvn -v verify sonar:sonar"
+    sh "mvn verify sonar:sonar"
   }
   stage('Build Image') {
     openshiftBuild(namespace: 'dev-reference', buildConfig: 'employee-service', showBuildLogs: 'true')
