@@ -9,9 +9,6 @@ import org.springframework.cloud.stream.binding.OutputBindingLifecycle;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
-import com.keyholesoftware.apistats.EnableApiStatistics;
-import com.keyholesoftware.publish.swagger.PublishSwagger;
-
 /**
  * @author Jaime Niswonger
  */
