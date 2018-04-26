@@ -1,13 +1,13 @@
 server:
   port: 8082
   ssl:
-    enabled: false
+    enabled: true
     keyStore: classpath:keystore.jks
     trustStore: classpath:truststore.jks
     keyStorePassword: password
     trustStorePassword: password
     keyAlias: employees
-    clientAuth: WANT
+    clientAuth: NEED 
 
 security:
   require-ssl: false
