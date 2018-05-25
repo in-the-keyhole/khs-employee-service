@@ -39,6 +39,7 @@ objects:
         from:
           kind: ImageStreamTag
           name: spring-boot-s2i:latest
+          namespace: infrastructure
     output:
       to:
         kind: ImageStreamTag
@@ -116,9 +117,6 @@ objects:
               periodSeconds: 10
               successThreshold: 1
               failureThreshold: 3
-            env:
-              - name: spring_cloud_config_uri
-                value: 'http://configuration-server:8080'
             terminationMessagePath: /dev/termination-log
             imagePullPolicy: Always
         restartPolicy: Always
@@ -175,12 +173,12 @@ parameters:
 - description: The URL of the Git repository
   displayName: Git URL
   name: GIT_URL
-  value: git@github.com:in-the-keyhole/khs-employee-service
+  value: https://github.com/in-the-keyhole/khs-employee-service.git
   required: true
 - description: The Git branch/tag reference
   displayName: Git branch/tag reference
   name: GIT_REF
-  value: openshift-cicd
+  value: keyhole.institute
   required: true
 - description: The secret containing Git credentials
   displayName: Git Credentials Secret
