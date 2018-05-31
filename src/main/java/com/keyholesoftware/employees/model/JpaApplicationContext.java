@@ -1,6 +1,5 @@
 package com.keyholesoftware.employees.model;
 
-import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
@@ -14,13 +13,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class JpaApplicationContext implements ApplicationContextAware {
 
-	private static ApplicationContext CONTEXT;
+	private static ApplicationContext appContext;
 
-	public void setApplicationContext(final ApplicationContext context) throws BeansException {
-		CONTEXT = context;
+	public void setApplicationContext(final ApplicationContext context) {
+		appContext = context;
 	}
 
 	public static <T> T getBean(Class<T> clazz) {
-		return CONTEXT.getBean(clazz);
+		return appContext.getBean(clazz);
 	}
 }

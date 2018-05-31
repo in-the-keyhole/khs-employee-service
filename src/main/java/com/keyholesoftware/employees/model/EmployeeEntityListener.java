@@ -22,26 +22,32 @@ public class EmployeeEntityListener {
 	private static final Logger log = LogManager.getLogger(EmployeeEntityListener.class);
 
 	void onPrePersist(Object o) {
+		// no op for this listener
 	}
 
 	@PostPersist
 	void onPostPersist(Object o) {
+		// no op for this listener		
 	}
 
 	@PostLoad
 	void onPostLoad(Object o) {
+		// no op for this listener		
 	}
 
 	@PreUpdate
 	void onPreUpdate(Object o) {
+		// no op for this listener
 	}
 
 	@PostUpdate
 	void onPostUpdate(Object o) {
+		// no op for this listener		
 	}
 
 	@PreRemove
 	void onPreRemove(Object o) {
+		// no op for this listener		
 	}
 
 	@PostRemove

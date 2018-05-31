@@ -53,7 +53,8 @@ public class X509ValidCertificateFilter extends GenericFilterBean {
 		X509Certificate[] certs = (X509Certificate[]) request.getAttribute(CERT_ATTRIBUTE);
 		if (certs != null && certs.length > 0) {
 			if (log.isDebugEnabled()) {
-				log.debug("X.509 client authentication certificate found:" + certs[0]);
+				log.debug(String.format("X.509 client authentication certificate found: %s", certs[0]));
+				
 			}
 			return certs[0];
 		}

@@ -2,7 +2,6 @@ package com.keyholesoftware.employees.security;
 
 import static java.util.Collections.emptyList;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
@@ -39,6 +38,7 @@ import com.nimbusds.jwt.SignedJWT;
 public class RSA256VerificationStrategy implements JWTVerificationStrategy {
 
 	private static Logger log = LoggerFactory.getLogger(RSA256VerificationStrategy.class);
+	private static final String BEARER = "Bearer";
 
 	@Value("${keyhole.security.public-key-url}")
 	private String publicKeyUrl;
@@ -73,34 +73,38 @@ public class RSA256VerificationStrategy implements JWTVerificationStrategy {
 					}
 				}
 			}
-		} catch (JOSEException | ParseException | NoSuchAlgorithmException | InvalidKeySpecException | IOException e) {
+		} catch (JOSEException | ParseException e) {
 			log.error("An exception occurred verifying the supplied JWT: ", e);
 		}
 		return authentication;
 	}
 
-	private RSAPublicKey getPublicKey(String certificateId) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
-		RSAPublicKey publicKey = keyCache.get(certificateId);
-		if (publicKey == null) {
+	private RSAPublicKey getPublicKey(String certificateId) {
+		return keyCache.computeIfAbsent(certificateId, c -> {
 			String publicKeyContent = restTemplate.getForObject(MessageFormat.format(publicKeyUrl, certificateId), String.class);
 			Reader reader = new StringReader(publicKeyContent);
-
-			PemFile pemFile = new PemFile(reader);
-			byte[] keyBytes = pemFile.getPemObject().getContent();
-
-			KeyFactory factory = KeyFactory.getInstance("RSA");
-			X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
-			publicKey = (RSAPublicKey) factory.generatePublic(keySpec);
-			keyCache.put(certificateId, publicKey);
-		}
-		return publicKey;
+			PemFile pemFile;
+			RSAPublicKey publicKey = null;
+			
+			try {
+				pemFile = new PemFile(reader);
+				byte[] keyBytes = pemFile.getPemObject().getContent();
+				KeyFactory factory = KeyFactory.getInstance("RSA");
+				X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
+				publicKey = (RSAPublicKey) factory.generatePublic(keySpec);
+				keyCache.put(c, publicKey);
+			} catch (IOException | NoSuchAlgorithmException | InvalidKeySpecException e) {
+				log.error("An error occurred getting the public key", e);
+			}
+			return publicKey;
+		});
 	}
 
 	class PemFile {
 
 		private PemObject pemObject;
 
-		public PemFile(Reader reader) throws FileNotFoundException, IOException {
+		public PemFile(Reader reader) throws IOException {
 			PemReader pemReader = new PemReader(reader);
 			try {
 				this.pemObject = pemReader.readPemObject();

@@ -33,7 +33,6 @@ public class JWTAuthenticationFilter extends GenericFilterBean {
 		if (authentication == null || !authentication.isAuthenticated()) {
 			log.error("5 ALARM FIRE: AN INVALID JWT WAS PASSED FROM THE EDGE");
 			((HttpServletResponse) response).sendError(HttpStatus.UNAUTHORIZED.value());
-			// TODO: What needs to be done here?
 		} else {
 			filterChain.doFilter(request, response);
 		}

@@ -9,9 +9,6 @@ import org.springframework.cloud.stream.binding.OutputBindingLifecycle;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
-import com.keyholesoftware.apistats.EnableApiStatistics;
-import com.keyholesoftware.publish.swagger.PublishSwagger;
-
 /**
  * @author Jaime Niswonger
  */
@@ -27,8 +24,7 @@ public class EmployeesApp {
 	
 	@Bean
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
-		RestTemplate restTemplate = builder.build();
-		return restTemplate;
+		return builder.build();
 	}
 
 	/**
@@ -38,11 +34,11 @@ public class EmployeesApp {
 	@Bean
 	@ConditionalOnProperty(name = "spring.cloud.stream.auto-startup", havingValue = "false")
 	OutputBindingLifecycle outputBindingLifecycle() {
-		OutputBindingLifecycle lc = new OutputBindingLifecycle() {
+		return new OutputBindingLifecycle() {
+			@Override
 			public boolean isAutoStartup() {
 				return false;
-			};
+			}
 		};
-		return lc;
 	}
 }

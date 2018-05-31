@@ -28,33 +28,21 @@ import com.fasterxml.jackson.core.JsonGenerator;
  * @see log4j2.json
  * @see log4j2.component.properties
  * 
- * This layout handles JSON formatting including all: 
- * 	{@link Marker}
- * 	{@link Throwable}
- * 	{@link ThreadContext} data
- *  {@link ExtendedStackTraceElement}
+ *      This layout handles JSON formatting including all: {@link Marker}
+ *      {@link Throwable} {@link ThreadContext} data
+ *      {@link ExtendedStackTraceElement}
  * 
- *  It will also handle the flattening of {@link MapMessage} payloads.
- *  
- *  Example:
- *		log.info(SOME_MARKER, (Supplier<MapMessage>) () -> new MapMessage().with("name", "value").with("anotherName", "anotherValue"));
- *	Produces:
- *		{@code
- *			{
- *				"timeMillis": 1498156000633,
- *				"thread": "hystrix-EmployeeService-1",
- *				"level": "INFO",
- *				"logger": "com.keyholesoftware.employees.EmployeeService",
- *				"markers": ["SOME MARKER", "SOME_MARKER_PARENT"]
- *				"name": "value",
- *				"anotherName": "anotherValue",
- *				"X-B3-ParentSpanId": "5d8e8b0103e4e8d4",
- *				"X-B3-SpanId": "5d8e8b0103e4e8d4",
- *				"X-B3-TraceId": "5d8e8b0103e4e8d4",
- *				"X-Span-Export": "false",
- *				"user": "developer"
- *			}
- * 		}
+ *      It will also handle the flattening of {@link MapMessage} payloads.
+ * 
+ *      Example: log.info(SOME_MARKER, (Supplier<MapMessage>) () -> new
+ *      MapMessage().with("name", "value").with("anotherName", "anotherValue"));
+ *      Produces: {@code { "timeMillis": 1498156000633, "thread":
+ *      "hystrix-EmployeeService-1", "level": "INFO", "logger":
+ *      "com.keyholesoftware.employees.EmployeeService", "markers":
+ *      ["SOME MARKER", "SOME_MARKER_PARENT"] "name": "value", "anotherName":
+ *      "anotherValue", "X-B3-ParentSpanId": "5d8e8b0103e4e8d4", "X-B3-SpanId":
+ *      "5d8e8b0103e4e8d4", "X-B3-TraceId": "5d8e8b0103e4e8d4", "X-Span-Export":
+ *      "false", "user": "developer" } }
  * 
  * @author jaimeniswonger
  */
@@ -76,8 +64,8 @@ public class JSONLayoutKeyhole extends AbstractStringLayout {
 	@Override
 	public String toSerializable(final LogEvent event) {
 		final StringWriter stringWriter = new StringWriter();
-		try {
-			final JsonGenerator g = jsonFactory.createGenerator(stringWriter);
+		try (final JsonGenerator g = jsonFactory.createGenerator(stringWriter)) {
+
 			g.writeStartObject();
 
 			writeStandard(g, event);
@@ -93,7 +81,7 @@ public class JSONLayoutKeyhole extends AbstractStringLayout {
 			writeContextData(g, event.getContextData());
 
 			g.writeEndObject();
-			g.close();
+
 			stringWriter.append("\n");
 		} catch (IOException e) {
 			LOGGER.error("Could not write event as JSON", e);
