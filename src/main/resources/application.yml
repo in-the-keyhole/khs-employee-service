@@ -61,5 +61,5 @@ swagger:
     
 keyhole:
   security:
-    public-key-url: http://localhost:3000/api/v1/certs/{0}
+    public-key-url: http://auth-n.keyhole.institute/api/v1/certs/{0}
     whitelist: apigateway, someOtherHost
