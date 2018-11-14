@@ -6,3 +6,4 @@ target
 /src/main/webapp/*
 !/src/main/webapp/WEB-INF
 .DS_Store
+/.idea/
